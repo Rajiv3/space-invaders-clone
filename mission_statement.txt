@@ -1,0 +1,4 @@
+Build an alien invasion game. player controls the ship, and can move the ship
+and shoot bullets to destroy the aliens. After all aliens on screen are killed, 
+a new alien wave will span that is more powerful. The player is killed by aliens
+reaching the bottom of the screen or aliens hitting the players ship. 

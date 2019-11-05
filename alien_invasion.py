@@ -13,9 +13,15 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
         
+        # to run in fullscreen, delete next line and uncomment following
         self.screen = pygame.display.set_mode(
-            (self.settings.screen_width, self.settings.screen_height))
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         
+        # self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        # self.settings.screen_width = self.screen.get_rect().width
+        # self.settings.screen_height = self.screen.get_rect().height
+
         pygame.display.set_caption("Aliens")
         self.bg_colour = (230, 230, 230)
         self.ship = Ship(self)
@@ -43,16 +49,29 @@ class AlienInvasion:
                 sys.exit()
 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = True
-                elif event.key == pygame.K_LEFT:        
-                    self.ship.moving_left = True
+                self._check_keydown_events(event)
 
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                elif event.key == pygame.K_LEFT:        
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
+
+
+    def _check_keydown_events(self, event):
+        """function to respond to key press"""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:        
+            self.ship.moving_left = True
+        # quit the game
+        elif event.key == pygame.K_q:
+            sys.exit()
+
+    def _check_keyup_events(self, event):
+        """function to respond to key releases"""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:        
+            self.ship.moving_left = False
+
 
 if __name__ == '__main__':
     # make the game instance and run it

@@ -7,15 +7,20 @@ class Ship:
         """initailize the ship, set the starting position"""
 
         self.screen = ai_game.screen
+        self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
 
         # load ship, get its rect
         # returns a surface representing the ship
         self.image = pygame.image.load('images/ship.bmp')
+        # rect is the rectangle of the ship
         self.rect = self.image.get_rect()
 
         # start each new ship at midbottom
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # store a decimal value for the ships position
+        self.x = float(self.rect.x)
 
         # movement flag
         self.moving_right = False
@@ -23,10 +28,15 @@ class Ship:
 
     def update(self):
         """ship moves depending on the status of the movement flag"""
-        if self.moving_right:
-            self.rect.x += 1
-        elif self.moving_left:
-            self.rect.x -= 1
+        # update ships x value
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.x += self.settings.ship_speed
+        elif self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
+
+        # update the ships rect object, from x
+        self.rect.x = self.x
+
 
     def blitme(self):
         """draw ship at its current location"""

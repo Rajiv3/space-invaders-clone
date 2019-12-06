@@ -12,3 +12,7 @@ class Settings:
         self.bullet_height = 15
         self.bullet_colour = (100,0,0)
         self.bullets_max = 10
+        # aliens
+        self.alien_speed = 1.0
+        self.fleet_drop_speed = 10
+        self.fleet_direction = 1 # moves to the right (-1 to the left)
